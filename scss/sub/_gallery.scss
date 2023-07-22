@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+
+.gallery {
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+
+	.loading {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		opacity: 1;
+		transition: 1s;
+
+		&.off {
+			opacity: 0;
+		}
+	}
+
+	.wrap {
+		opacity: 0;
+		transform: translateY(100px);
+		transition: 1s;
+
+		&.on {
+			opacity: 1;
+			transform: translateY(0px);
+		}
+
+		&::after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+		li {
+			width: calc(100% / 4);
+			float: left;
+			padding: 10px;
+
+			> div {
+				width: 100%;
+				background: #fff;
+				padding: 10px;
+				box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
+
+				img {
+					width: 100%;
+				}
+
+				p {
+					font: 18px/1.2 'Architects daughter';
+					color: #777;
+					margin-top: 10px;
+					margin-bottom: 20px;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $tablet) {
+	.gallery {
+		.wrap {
+			li {
+				width: calc(100% / 2);
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $mobile) {
+	.gallery {
+		.wrap {
+			li {
+				width: calc(100% / 1);
+			}
+		}
+	}
+}

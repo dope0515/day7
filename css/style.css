@@ -1,0 +1,592 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
+* {
+  margin: 0px;
+  padding: 0px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  background: #efefef;
+}
+
+fieldset {
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+input,
+label {
+  vertical-align: middle;
+}
+
+.h {
+  position: absolute;
+  top: -99999px;
+  opacity: 0;
+}
+
+header {
+  width: 100%;
+  height: 120px;
+  padding: 50px 10% 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+header h1 a {
+  font: bold 24px/1 "arial";
+  color: #333;
+}
+header ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+}
+header ul#gnb {
+  gap: 40px;
+}
+header ul#gnb a {
+  font: bold 14px/1 "arial";
+  color: #777;
+}
+header ul.sns a {
+  font-size: 20px;
+  color: #888;
+}
+header .btnCall {
+  display: none;
+}
+header.header_main {
+  position: absolute;
+  border-bottom: none;
+  z-index: 2;
+}
+header.header_main h1 a,
+header.header_main ul#gnb a,
+header.header_main ul.sns a,
+header.header_main .btnCall {
+  color: #fff;
+}
+
+/*
+  반응형 구현 순서
+  1. 일단 웹버전의 scss구문을 모바일 미디어쿼리 안쪽에 모두 붙여넣기
+  2. 고칠 필요가 없는 구문은 소거법으로 지워나감
+  3. 모바일 구문에서 꼭 수정해야 되는 것들
+  ---- 넓이값이 고정 px인 요소는 가로 폭이 100%가 되도록 퍼센트로 변환
+  ---- 대신 높이값은 고정 px값이어도 상관없음
+  ---- 가능하다면 세로관련 높이값과 여백을 줄일 수 있으면 줄이는걸 추천
+*/
+@media screen and (max-width: 999px) {
+  header {
+    height: 100px;
+    padding: 10px 10%;
+  }
+  header h1 {
+    position: relative;
+    top: -2px;
+  }
+  header h1 a {
+    font: bold 20px/1 "arial";
+  }
+  header ul {
+    display: none;
+  }
+  header .btnCall {
+    display: block;
+    color: #444;
+    font-size: 20px;
+  }
+}
+footer {
+  padding: 120px 10vw;
+  background: #333;
+}
+footer .upper {
+  padding: 20px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-bottom: 1px solid #777;
+}
+footer .upper h1 {
+  font: bold 24px/1 "arial";
+  color: #777;
+}
+footer .upper ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+}
+footer .upper ul a {
+  font: 14px/1 "arial";
+  color: #777;
+}
+footer .lower {
+  padding: 20px 0px;
+}
+footer .lower address,
+footer .lower p {
+  font: 14px/1.2 "arial";
+  color: #777;
+}
+footer .lower address:last-child,
+footer .lower p:last-child {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 639px) {
+  footer .upper {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+  footer .upper h1 {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+.content {
+  width: 100%;
+}
+.content .subVisual {
+  width: 100%;
+  height: 250px;
+  background: gray;
+}
+.content .inner {
+  padding: 150px 10vw 100px;
+  min-height: 800px;
+}
+.content .inner h1 {
+  font: normal 50px/1 "arial";
+  color: #333;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 999px) {
+  .content .inner {
+    padding: 100px 10vw 80px;
+  }
+  .content .inner h1 {
+    font-size: 30px;
+  }
+}
+@media screen and (max-width: 639px) {
+  .content .inner {
+    padding: 80px 40px 60px;
+  }
+  .content .inner h1 {
+    font-size: 24px;
+  }
+}
+#visual {
+  width: 100%;
+  height: 100vh;
+  background: #111;
+  position: relative;
+}
+
+#vids {
+  width: 100%;
+  height: 100vh;
+  background: lightblue;
+  position: relative;
+}
+
+#pics {
+  width: 100%;
+  height: 100vh;
+  background: pink;
+  position: relative;
+}
+
+#banner {
+  width: 100%;
+  height: 100vh;
+  background: lightgreen;
+  position: relative;
+}
+
+#news {
+  width: 100%;
+  height: 100vh;
+  background: orange;
+  position: relative;
+}
+
+#scroll_navi {
+  position: fixed;
+  top: 50%;
+  right: 50px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  z-index: 5;
+}
+#scroll_navi li {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #333;
+  background: #fff;
+  margin-bottom: 20px;
+  cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+#scroll_navi li.on {
+  height: 100px;
+  border: 1px solid #fff;
+  background: #333;
+}
+
+#pop {
+  width: 320px;
+  height: 200px;
+  background: #fff;
+  position: fixed;
+  right: 5vw;
+  bottom: 5vh;
+  border: 1px solid #777;
+  -webkit-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+          box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+  display: block;
+}
+#pop .content {
+  width: 100%;
+  height: 160px;
+  padding: 20px;
+}
+#pop .bottom {
+  width: 100%;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 20px;
+}
+#pop .bottom .wrap label {
+  font: 12px/1 "돋움";
+  color: #777;
+  margin-left: 2px;
+}
+#pop .bottom .close {
+  font: bold 14px/1 "arial";
+  color: #555;
+}
+
+.modal {
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  padding: 100px;
+  opacity: 0;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s;
+}
+.modal .con {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 25px;
+}
+.modal .con iframe, .modal .con video, .modal .con img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: none;
+}
+.modal .close {
+  font: bold 14px/1 "arial";
+  color: #fff;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+}
+.modal.on {
+  opacity: 1;
+}
+
+.department .inner .wrap::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.department .inner .wrap article {
+  width: 33.3333333333%;
+  float: left;
+  padding: 20px;
+  margin-bottom: 40px;
+}
+.department .inner .wrap article .pic {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 10px;
+}
+.department .inner .wrap article .pic img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.department .inner .wrap article h2 {
+  font: bold 20px/1 "arial";
+  color: #333;
+  margin-bottom: 5px;
+}
+.department .inner .wrap article p {
+  font: 16px/1 "arial";
+  color: #555;
+}
+
+@media screen and (max-width: 999px) {
+  .department .inner .wrap article {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 639px) {
+  .department .inner .wrap article {
+    width: 100%;
+  }
+}
+.youtube .inner .wrap article {
+  width: 100%;
+  padding: 20px 0px;
+  border-bottom: 1px solid #ddd;
+}
+.youtube .inner .wrap article::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.youtube .inner .wrap article h2 {
+  width: 40%;
+  float: left;
+  padding-right: 20px;
+  font: normal 38px/1 "work sans";
+  color: #111;
+}
+.youtube .inner .wrap article .txt {
+  width: 30%;
+  float: left;
+  padding-right: 20px;
+}
+.youtube .inner .wrap article .txt p {
+  font: 14px/1.2 "arial";
+  color: #666;
+  margin-bottom: 40px;
+}
+.youtube .inner .wrap article .txt span {
+  font: 12px/1 "arial";
+  color: orange;
+}
+.youtube .inner .wrap article .pic {
+  width: 30%;
+  height: 180px;
+  float: left;
+}
+.youtube .inner .wrap article .pic img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media screen and (max-width: 999px) {
+  .youtube .inner .wrap article h2 {
+    width: 50%;
+    font-size: 28px;
+  }
+  .youtube .inner .wrap article .txt {
+    width: 50%;
+    padding-right: 0px;
+  }
+  .youtube .inner .wrap article .pic {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 639px) {
+  .youtube .inner .wrap article h2 {
+    width: 100%;
+    font-size: 20px;
+    padding-right: 0px;
+  }
+  .youtube .inner .wrap article .txt {
+    width: 100%;
+  }
+  .youtube .inner .wrap article .pic {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+.gallery {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.gallery .loading {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  opacity: 1;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+.gallery .loading.off {
+  opacity: 0;
+}
+.gallery .wrap {
+  opacity: 0;
+  -webkit-transform: translateY(100px);
+          transform: translateY(100px);
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+.gallery .wrap.on {
+  opacity: 1;
+  -webkit-transform: translateY(0px);
+          transform: translateY(0px);
+}
+.gallery .wrap::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.gallery .wrap li {
+  width: 25%;
+  float: left;
+  padding: 10px;
+}
+.gallery .wrap li > div {
+  width: 100%;
+  background: #fff;
+  padding: 10px;
+  -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
+          box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
+}
+.gallery .wrap li > div img {
+  width: 100%;
+}
+.gallery .wrap li > div p {
+  font: 18px/1.2 "Architects daughter";
+  color: #777;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 999px) {
+  .gallery .wrap li {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 639px) {
+  .gallery .wrap li {
+    width: 100%;
+  }
+}
+.members form table {
+  width: 100%;
+  border: none;
+  border-top: 2px solid #333;
+  border-bottom: 2px solid #333;
+}
+.members form table th,
+.members form table td {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  padding: 16px 25px;
+}
+.members form table th {
+  width: 20%;
+}
+.members form table th input[type=submit],
+.members form table th input[type=reset] {
+  width: 30%;
+  height: 40px;
+  border: 1px solid #333;
+  margin: 10px;
+  font: bold 14px/40px "arial";
+  color: #555;
+  cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+.members form table th input[type=submit]:hover,
+.members form table th input[type=reset]:hover {
+  background: #333;
+  color: #fff;
+}
+.members form table td {
+  border-left: 1px solid #aaa;
+}
+.members form table td input[type=text],
+.members form table td input[type=password],
+.members form table td input[type=email],
+.members form table td select,
+.members form table td textarea {
+  width: 60%;
+  background: rgba(0, 0, 0, 0.03);
+  padding: 10px;
+  border: 1px solid #aaa;
+  resize: none;
+}
+.members form table td input[type=checkbox],
+.members form table td input[type=radio] {
+  margin-right: 30px;
+}
+.members form table td p {
+  color: hotpink;
+  margin-top: 5px;
+  font: 11px/1 "맑은 고딕";
+}
+
+.location .inner #map {
+  width: 100%;
+  height: 400px;
+  background: #111;
+  position: relative;
+}
