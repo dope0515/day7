@@ -466,30 +466,54 @@ footer .lower p:last-child {
   overflow: hidden;
   position: relative;
 }
+.gallery .searchBox {
+  width: 100%;
+  padding: 50px 10px 20px;
+  font-size: 0;
+}
+.gallery .searchBox input {
+  width: 260px;
+  height: 30px;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding-left: 10px;
+}
+.gallery .searchBox .btnSearch {
+  display: inline-block;
+  width: 80px;
+  height: 29px;
+  background: #333;
+  color: #fff;
+  font: bold 12px/29px "arial";
+  text-align: center;
+  border: 0;
+  margin-left: 5px;
+  cursor: pointer;
+  -webkit-transform: translateY(4px);
+          transform: translateY(4px);
+}
 .gallery .loading {
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: 50%;
   left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   opacity: 1;
-  -webkit-transition: 1s;
-  transition: 1s;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s;
+  z-index: 3;
 }
 .gallery .loading.off {
   opacity: 0;
+  z-index: -1;
 }
 .gallery .wrap {
   opacity: 0;
-  -webkit-transform: translateY(100px);
-          transform: translateY(100px);
-  -webkit-transition: 1s;
-  transition: 1s;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s;
 }
 .gallery .wrap.on {
   opacity: 1;
-  -webkit-transform: translateY(0px);
-          transform: translateY(0px);
 }
 .gallery .wrap::after {
   content: "";
@@ -505,17 +529,27 @@ footer .lower p:last-child {
   width: 100%;
   background: #fff;
   padding: 10px;
-  -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
-          box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
 }
-.gallery .wrap li > div img {
+.gallery .wrap li > div .thumb {
   width: 100%;
 }
 .gallery .wrap li > div p {
-  font: 18px/1.2 "Architects daughter";
+  font: 18px/1.2 "Architects Daughter";
   color: #777;
   margin-top: 10px;
   margin-bottom: 20px;
+}
+.gallery .wrap li > div .profile img {
+  width: 36px;
+}
+.gallery .wrap li > div .profile span {
+  display: inline-block;
+  font: 12px/1 "arial";
+  color: orange;
+  margin-left: 5px;
+  -webkit-transform: translateY(-14px);
+          transform: translateY(-14px);
+  cursor: pointer;
 }
 
 @media screen and (max-width: 999px) {
