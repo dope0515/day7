@@ -1,60 +1,86 @@
 const wrap = document.querySelector('.wrap');
 const loading = document.querySelector('.loading');
 const input = document.querySelector('#search');
+const btnSet = document.querySelector('.btnSet');
 const btnSearch = document.querySelector('.btnSearch');
 const btnInterest = document.querySelector('.btnInterest');
-const btnMy = document.querySelector('.btnMy');
-const myId = '198187803@N02';
-const key = 'ddb99acf82f717f3bbb19edfc6b1d7e2';
-const num = 50;
-const method_interest = 'flickr.interestingness.getList';
-const method_user = 'flickr.people.getPhotos';
-const method_search = 'flickr.photos.search';
-const baseURL = `https://www.flickr.com/services/rest/?per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&method=`;
-const interest_url = `${baseURL}${method_interest}`;
-const my_url = `${baseURL}${method_user}&user_id=${myId}`;
-const search_url = `${baseURL}${method_search}&tags=landscape`;
+const btnMine = document.querySelector('.btnMine');
+let enableEvent = true;
 
-fetchData(interest_url);
+fetchData(setURL('interest'));
 
-btnSearch.addEventListener('click', e => {
-    e.preventDefault();
-    const value = input.value.trim();
-    input.value='';
-    if(value === '') return alert('검색어를 입력하세요.');
+btnSearch.addEventListener('click', getSearch);
 
+input.addEventListener('keypress', (e) => {
+	if (e.code === 'Enter') getSearch();
+});
+
+btnMine.addEventListener('click', (e) => {
+	if (e.target.classList.contains('on')) return;
+	if (!enableEvent) return;
+	enableEvent = false;
+	resetGallery(e);
+	fetchData(setURL('user', '164021883@N04'));
+});
+
+btnInterest.addEventListener('click', (e) => {
+	if (e.target.classList.contains('on')) return;
+	if (!enableEvent) return;
+	enableEvent = false;
+	resetGallery(e);
+	fetchData(setURL('interest'));
+});
+
+document.body.addEventListener('click', (e) => {
+	if (e.target.className === 'userid') {
+		resetGallery(e);
+		fetchData(setURL('user', e.target.innerText));
+	}
+	if (e.target.className === 'thumb') createPop(e.target.getAttribute('alt'));
+	if (e.target.className === 'close') removePop();
+});
+
+function getSearch(e) {
+	const value = input.value.trim();
+	input.value = '';
+	if (value === '') return alert('검색어를 입력하세요.');
+
+	resetGallery(e);
+	fetchData(setURL('search', value));
+}
+
+function resetGallery(e) {
+	const btns = btnSet.querySelectorAll('button');
+	btns.forEach((el) => el.classList.remove('on'));
 	loading.classList.remove('off');
 	wrap.classList.remove('on');
-	
-	const url = `${baseURL}${method_search}&tags=${value}`;
-	fetchData(url);
-});
+	e?.target.classList.add('on');
+}
 
-btnMy.addEventListener('click', ()=> {
-    loading.classList.remove('off');
-	wrap.classList.remove('on');
-    fetchData(my_url)
-});
-btnInterest.addEventListener('click', ()=> {
-    loading.classList.remove('off');
-	wrap.classList.remove('on');
-    fetchData(interest_url)
-});
+function setURL(type, opt) {
+	const key = '14e9b9e62db25fccd509a4f5c7505278';
+	const num = 50;
+	const baseURL = `https://www.flickr.com/services/rest/?per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&method=`;
+	const method_interest = 'flickr.interestingness.getList';
+	const method_user = 'flickr.people.getPhotos';
+	const method_search = 'flickr.photos.search';
 
-wrap.addEventListener('click',e => {
-    if(e.target.className === 'userid') {
-        const userId = e.target.innerText;
-        const user_url = `${baseURL}${method_user}&user_id=${userId}`;
-        loading.classList.remove('off');
-        wrap.classList.remove('on');
-        fetchData(user_url);
-    }
-})
+	const myId = '164021883@N04';
+	if (type === 'interest') return `${baseURL}${method_interest}`;
+	if (type === 'search') return `${baseURL}${method_search}&tags=${opt}`;
+	if (type === 'user') return `${baseURL}${method_user}&user_id=${opt}`;
+}
 
 async function fetchData(url) {
 	const response = await fetch(url);
 	const json = await response.json();
-	createList(json.photos.photo);
+	const items = json.photos.photo;
+	if (items.length === 0) {
+		loading.classList.add('off');
+		wrap.classList.add('on');
+		return alert('해당 검색어의 결과이미지가 없습니다.');
+	}
+	createList(items);
 	setLoading();
 }
 
@@ -63,15 +89,13 @@ function createList(arr) {
 	arr.forEach((item) => {
 		tags += `
 				<li class='item'>
-					<div>
-						<a href='https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_b.jpg'>
-							<img class='thumb' src='https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg' />
-						</a>	
+					<div>						
+						<img class='thumb' src='https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg' alt='https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_b.jpg' />						
 						<p>${item.title}</p>	
 						
 						<article class='profile'>
 							<img src='http://farm${item.farm}.staticflickr.com/${item.server}/buddyicons/${item.owner}.jpg' />
-							<span class="userid">${item.owner}</span>
+							<span class='userid'>${item.owner}</span>
 						</article>
 					</div>
 				</li>
@@ -92,18 +116,40 @@ function setLoading() {
 		//디폴트로 변경된 이미지까지 포함해서 카운트 (무한로딩에 빠지지 않음)
 		el.onload = () => {
 			count++;
-			console.log(count);
 			count === imgs.length && isoLayout();
 		};
 	}
 }
 
 function isoLayout() {
-	console.log('모든 이미지 로딩완료 후 isoLayout적용');
 	new Isotope(wrap, {
 		itemSelector: '.item',
 		transitionDuration: '0.5s',
 	});
 	wrap.classList.add('on');
 	loading.classList.add('off');
+	setTimeout(() => (enableEvent = true), 500);
+}
+
+function createPop(url) {
+	document.body.style.overflow = 'hidden';
+	const aside = document.createElement('aside');
+	aside.className = 'pop';
+	const tags = `
+		<div class='con'>
+			<img src=${url} />
+		</div>
+		<span class='close'>close</span>
+	`;
+
+	aside.innerHTML = tags;
+	document.body.append(aside);
+	setTimeout(() => aside.classList.add('on'), 0);
+}
+
+function removePop() {
+	document.body.style.overflow = 'auto';
+	const pop = document.querySelector('.pop');
+	pop.classList.remove('on');
+	setTimeout(() => pop.remove(), 1000);
 }

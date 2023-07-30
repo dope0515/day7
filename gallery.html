@@ -8,8 +8,8 @@
   <title>Document</title>
   <script src="https://kit.fontawesome.com/1d8113f26b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/style.css">
-  <script defer src="js/flickr.js"></script>
-  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+  <script defer type='module' src="js/flickr.js"></script>
 </head>
 
 <body>
@@ -42,18 +42,19 @@
     <figure class="subVisual"></figure>
     <div class="inner">
       <h1>Gallery</h1>
+
       <div class="searchBox">
         <input type="text" id="search" placeholder="검색어 입력">
         <button class="btnSearch">Search</button>
       </div>
+
       <div class="btnSet">
-        <button class="btnInterest">Interest Gallery</button>
-        <button class="btnMy">My Gallery</button>
+        <button class="btnInterest  on">Interest Gallery</button>
+        <button class="btnMine">My Gallery</button>
       </div>
+
       <img src="img/loading.gif" alt="loading" class="loading">
-      <ul class="wrap">
-        
-      </ul>
+      <ul class="wrap"></ul>
     </div>
   </section>
 

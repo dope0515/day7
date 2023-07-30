@@ -21,8 +21,6 @@ async function fetchData() {
 		});
 
 		wrap.innerHTML = tags;
-		
-		console.log(tags);
 	} catch (err) {
 		console.log(err);
 	}

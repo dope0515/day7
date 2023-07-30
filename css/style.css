@@ -4,8 +4,7 @@
 * {
   margin: 0px;
   padding: 0px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 ul,
@@ -45,15 +44,9 @@ header {
   width: 100%;
   height: 120px;
   padding: 50px 10% 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid #ddd;
 }
 header h1 a {
@@ -61,8 +54,6 @@ header h1 a {
   color: #333;
 }
 header ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   gap: 20px;
 }
@@ -128,12 +119,8 @@ footer {
 }
 footer .upper {
   padding: 20px 0px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   border-bottom: 1px solid #777;
 }
 footer .upper h1 {
@@ -141,8 +128,6 @@ footer .upper h1 {
   color: #777;
 }
 footer .upper ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   gap: 20px;
 }
@@ -165,11 +150,8 @@ footer .lower p:last-child {
 
 @media screen and (max-width: 639px) {
   footer .upper {
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -webkit-box-pack: start;
-        -ms-flex-pack: start;
-            justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
   footer .upper h1 {
     width: 100%;
@@ -249,8 +231,7 @@ footer .lower p:last-child {
   position: fixed;
   top: 50%;
   right: 50px;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   z-index: 5;
 }
 #scroll_navi li {
@@ -260,7 +241,6 @@ footer .lower p:last-child {
   background: #fff;
   margin-bottom: 20px;
   cursor: pointer;
-  -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 #scroll_navi li.on {
@@ -277,9 +257,8 @@ footer .lower p:last-child {
   right: 5vw;
   bottom: 5vh;
   border: 1px solid #777;
-  -webkit-box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
-          box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
-  display: block;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+  display: none;
 }
 #pop .content {
   width: 100%;
@@ -289,15 +268,9 @@ footer .lower p:last-child {
 #pop .bottom {
   width: 100%;
   height: 40px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   padding: 0 20px;
 }
 #pop .bottom .wrap label {
@@ -320,20 +293,18 @@ footer .lower p:last-child {
   z-index: 9;
   padding: 100px;
   opacity: 0;
-  -webkit-transition: opacity 1s;
   transition: opacity 1s;
 }
 .modal .con {
   width: 100%;
   height: 100%;
-  background: #fff;
-  border-radius: 25px;
 }
-.modal .con iframe, .modal .con video, .modal .con img {
+.modal .con iframe,
+.modal .con video,
+.modal .con img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border: none;
 }
 .modal .close {
@@ -367,8 +338,7 @@ footer .lower p:last-child {
 .department .inner .wrap article .pic img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .department .inner .wrap article h2 {
   font: bold 20px/1 "arial";
@@ -429,8 +399,7 @@ footer .lower p:last-child {
 .youtube .inner .wrap article .pic img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 999px) {
@@ -486,21 +455,18 @@ footer .lower p:last-child {
   color: #fff;
   font: bold 12px/29px "arial";
   text-align: center;
-  border: 0;
-  margin-left: 5px;
+  border: none;
   cursor: pointer;
-  -webkit-transform: translateY(4px);
-          transform: translateY(4px);
+  transform: translateY(3px);
+  margin-left: 5px;
 }
 .gallery .loading {
   position: fixed;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   opacity: 1;
-  -webkit-transition: opacity 1s;
-  transition: opacity 1s;
+  transition: opacity 0.5s;
   z-index: 3;
 }
 .gallery .loading.off {
@@ -509,11 +475,12 @@ footer .lower p:last-child {
 }
 .gallery .wrap {
   opacity: 0;
-  -webkit-transition: opacity 1s;
-  transition: opacity 1s;
+  transform: translateY(100px);
+  transition: 0.5s;
 }
 .gallery .wrap.on {
   opacity: 1;
+  transform: translateY(0px);
 }
 .gallery .wrap::after {
   content: "";
@@ -547,9 +514,40 @@ footer .lower p:last-child {
   font: 12px/1 "arial";
   color: orange;
   margin-left: 5px;
-  -webkit-transform: translateY(-14px);
-          transform: translateY(-14px);
+  transform: translateY(-10px);
   cursor: pointer;
+}
+
+.pop {
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  padding: 5vw;
+  opacity: 0;
+  transition: opacity 1s;
+}
+.pop.on {
+  opacity: 1;
+}
+.pop .con {
+  width: 100%;
+  height: 100%;
+}
+.pop .con img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.pop .close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  color: orange;
 }
 
 @media screen and (max-width: 999px) {
@@ -586,7 +584,6 @@ footer .lower p:last-child {
   font: bold 14px/40px "arial";
   color: #555;
   cursor: pointer;
-  -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 .members form table th input[type=submit]:hover,
@@ -608,6 +605,9 @@ footer .lower p:last-child {
   border: 1px solid #aaa;
   resize: none;
 }
+.members form table td label {
+  margin-right: 5px;
+}
 .members form table td input[type=checkbox],
 .members form table td input[type=radio] {
   margin-right: 30px;
@@ -624,3 +624,5 @@ footer .lower p:last-child {
   background: #111;
   position: relative;
 }
+
+/*# sourceMappingURL=style.css.map */
